@@ -8,6 +8,14 @@
   --background-end-rgb: 255, 255, 255;
 }
 
+* {
+  transition: .15s ease;
+}
+
+*::-webkit-scrollbar{
+  display: none;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
@@ -24,4 +32,11 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+}
+
+.bgImg {
+  background-image: url(https://weatherwise.sirv.com/Images/elements/pexels-photo-2028885.jpeg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
