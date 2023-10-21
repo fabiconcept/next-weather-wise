@@ -1,7 +1,9 @@
+"use client";
 import Image from "next/image";
 import { FaBell, FaSearch } from "react-icons/fa";
 
 export default function ExploreSection() {
+    
     return (
         <section className="relative p-2 rounded-2xl overflow-hidden min-w-fit flex-1 bgImg border-2 md:min-h-[20rem] min-h-[25rem] dark:border-white/20 border-black/20">
             <div className="absolute h-full w-full bg-black/20 -top-1 -left-1 scale-105"></div>

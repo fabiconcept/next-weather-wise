@@ -1,3 +1,4 @@
+import { Providers } from '@/redux-store/provider/provider';
 import './globals.css';
 import { Inter } from 'next/font/google';
 
@@ -14,7 +15,11 @@ export default function RootLayout({ children }) {
             <head>
                 <link rel="icon" href="android-icon-72x72.png" sizes="any" />
             </head>
-            <body className={inter.className}>{children}</body>
+            <body className={inter.className}>
+                <Providers>
+                    {children}
+                </Providers>
+            </body>
         </html>
     )
 }
