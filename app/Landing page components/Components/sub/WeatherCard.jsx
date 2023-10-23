@@ -39,7 +39,7 @@ export default function WeatherCard({ locationInfo, imgSrc, status }) {
 
     return (
         <section className="w-full flex flex-col h-full relative" title={toolTip}>
-            <div className="w-full flex items-center py-2 px-3 border-b bg-themeMain/80 relative">
+            <div className="w-full flex items-center py-2 px-3 border-b border-black/20 dark:border-white/20 relative">
                 <span className="flex-1 font-semibold text-xs">{locationInfo}</span>
                 {weatherReport}
             </div>

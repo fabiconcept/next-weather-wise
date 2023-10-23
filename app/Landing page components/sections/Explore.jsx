@@ -1,9 +1,17 @@
 "use client";
+import { getForecastTest } from "@/redux-store/thunk/testThunk";
 import Image from "next/image";
+import { useEffect } from "react";
 import { FaBell, FaSearch } from "react-icons/fa";
 
+import { useDispatch } from "react-redux";
+
 export default function ExploreSection() {
-    
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getForecastTest());
+    }, [dispatch]);
     return (
         <section className="relative p-2 rounded-2xl overflow-hidden min-w-fit flex-1 bgImg border-2 md:min-h-[20rem] min-h-[25rem] dark:border-white/20 border-black/20">
             <div className="absolute h-full w-full bg-black/20 -top-1 -left-1 scale-105"></div>
@@ -26,6 +34,8 @@ export default function ExploreSection() {
                         type="text"
                         className="absolute right-4 rounded-full px-4 py-2 text-sm bg-white/10 border-2 border-white placeholder:text-white placeholder-shown:w-28 placeholder-shown:opacity-50 opacity-100 flex-1 w-[calc(100%-2rem)] outline-none"
                         placeholder="Search"
+                        maxLength={25}
+                        minLength={2}
                     />
                 </div>
             </div>

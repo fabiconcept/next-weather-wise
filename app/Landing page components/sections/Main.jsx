@@ -62,10 +62,10 @@ export default function MainSection() {
                 </div>
             </div>
 
-            <div className="flex gap-2 flex-wrap">
+            <div className="flex gap-2 flex-wrap text-white">
                 <div className="min-w-fit flex-1 rounded-full flex p-2 items-center text-sm bg-blue-600 cursor-pointer active:scale-90 opacity-80 hover:opacity-100">
                     <span className="flex-1 px-8">Try for free</span>
-                    <div className="grid place-items-center p-2 rounded-full bg-black/80 rotate-[30deg] text-sm">
+                    <div className="grid place-items-center p-2 rounded-full dark:bg-black/80 bg-black rotate-[30deg] text-sm">
                         <FaArrowUp className="font-thin" />
                     </div>
                 </div>

@@ -1,10 +1,10 @@
 .mySwiper {
-    perspective: 500px;
+    perspective: 700px;
     /* transform: scale(.9); */
 }
 
 .mySwiper > div {
 
     /* -webkit-transform: rotateX(0deg) rotateY(-10deg) rotateZ(0deg); */
-    transform: rotateX(0deg) rotateY(-5deg) rotateZ(0deg);
+    transform: rotateX(0deg) rotateY(-2deg) rotateZ(0deg);
 }

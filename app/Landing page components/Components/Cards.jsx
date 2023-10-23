@@ -25,8 +25,8 @@ export default function Cards() {
                 modules={[EffectCards]}
                 className="mySwiper w-full h-full grid place-items-center"
             >
-                {cardData.map((card) => (
-                    <SwiperSlide key={card.locationInfo} className={`rounded-2xl backdrop-blur-md dark:bg-white/5 bg-white/25 border-2 dark:border-white/50 border-themeMain/50 max-w-[90%]`}>
+                {cardData.map((card, index) => (
+                    <SwiperSlide key={index} className={`rounded-2xl backdrop-blur-md dark:bg-white/5 bg-white/25 border-2 border-black/20 dark:border-white/20 max-w-[90%]`}>
                         <WeatherCard
                             locationInfo={card.locationInfo}
                             imgSrc={card.imgSrc}
