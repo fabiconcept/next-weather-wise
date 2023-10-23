@@ -1,7 +1,7 @@
-"use client";
+"use client"
 import { getForecastTest } from "@/redux-store/thunk/testThunk";
 import Image from "next/image";
-import { useEffect } from "react";
+import { useMemo } from "react";
 import { FaBell, FaSearch } from "react-icons/fa";
 
 import { useDispatch } from "react-redux";
@@ -9,9 +9,10 @@ import { useDispatch } from "react-redux";
 export default function ExploreSection() {
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(getForecastTest());
+    const testMemo = useMemo(() => {
+        dispatch(getForecastTest());        
     }, [dispatch]);
+
     return (
         <section className="relative p-2 rounded-2xl overflow-hidden min-w-fit flex-1 bgImg border-2 md:min-h-[20rem] min-h-[25rem] dark:border-white/20 border-black/20">
             <div className="absolute h-full w-full bg-black/20 -top-1 -left-1 scale-105"></div>

@@ -10,7 +10,12 @@ export const MainWeatherSlice = createSlice({
     reducers: {
         getMainWeather (state, action) {
             const payload = action.payload
-            
+            console.log(payload.location);
+            console.log(payload.current);
+        },
+        setLoading (state, action){
+            const payload = action.payload
+            state.isLoading = payload
         }
     }
 })
