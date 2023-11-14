@@ -1,17 +1,27 @@
 "use client"
+import { useIconSelector } from "@/myHooks/selectIcon";
 import { getForecastTest } from "@/redux-store/thunk/testThunk";
 import Image from "next/image";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { FaBell, FaSearch } from "react-icons/fa";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function ExploreSection() {
     const dispatch = useDispatch();
+    const [weatherIcon, setWeatherCondition, setTimeOfDay] = useIconSelector();
+    const { isLoading, data, error } = useSelector((state) => state.mainWeatherAction);
 
     const testMemo = useMemo(() => {
-        dispatch(getForecastTest());        
-    }, [dispatch]);
+        dispatch(getForecastTest("london,uk"));
+    }, []);
+
+    const currentIcon = useMemo(() => {
+        if (isLoading !== null && !isLoading && !error.condition) {
+            setWeatherCondition(data.condition.text);
+            setTimeOfDay();
+        }
+    }, [isLoading, data, error]);
 
     return (
         <section className="relative p-2 rounded-2xl overflow-hidden min-w-fit flex-1 bgImg border-2 md:min-h-[20rem] min-h-[25rem] dark:border-white/20 border-black/20">
@@ -57,25 +67,26 @@ export default function ExploreSection() {
                 </div>
             </div>
 
-            <div className="absolute z-10 bottom-2 left-2 text-xs p-3 bg-white/20 backdrop-blur-lg max-w-sm rounded-lg text-white flex flex-col gap-3">
+            {isLoading !== null && !isLoading && !error.condition && <div className="absolute z-10 bottom-2 left-2 text-xs p-3 bg-white/20 backdrop-blur-lg max-w-sm rounded-lg text-white flex flex-col gap-3">
                 <div className="text-base w-full relative">
                     <div className="max-w-[8rem] font-semibold">
                         London, United Kingdom
                     </div>
                     <div className="absolute z-10 -top-16 -right-16 text-xs">
                         <Image
-                            src={"https://weatherwise.sirv.com/Images/all/partly-cloudy-day-rain.svg"}
-                            alt="Weather icon"
+                            src={weatherIcon}
+                            alt={data.condition.text}
+                            title={data.condition.text}
                             height={150}
                             width={150}
                         />
                     </div>
                 </div>
-                <div className="text-sm max-w-[18rem]">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae eveniet a voluptates ullam unde vero.
-                </div>
-                
-            </div>
+                {<div className="text-sm max-w-[18rem]">
+                    Current weather: <span className="text-blue-300 cursor-pointer">{data.temp_c}</span>°C (<span className="text-blue-300 cursor-pointer">{data.temp_f}</span>°F), <span className="text-blue-300 cursor-pointer">{data.condition.text}</span>. Wind: <span className="text-blue-300 cursor-pointer">{data.wind_kph}</span> kph (<span className="text-blue-300 cursor-pointer">{data.wind_mph}</span> mph), <span className="text-blue-300 cursor-pointer">{data.wind_dir}</span>. Humidity: <span className="text-blue-300 cursor-pointer">{data.humidity}</span>%. Visibility: <span className="text-blue-300 cursor-pointer">{data.vis_km}</span> km (<span className="text-blue-300 cursor-pointer">{data.vis_miles}</span> miles). Feels like: <span className="text-blue-300 cursor-pointer">{data.feelslike_c}</span>°C (<span className="text-blue-300 cursor-pointer">{data.feelslike_c}</span>°F).
+                </div>}
+
+            </div>}
         </section>
     );
 }

@@ -1,13 +1,13 @@
 import { MainWeatherAction } from "../slices/LandingPageSlice";
 
-const params = `&q=gaza,palestine&aqi=no`;
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL_CURRENT;
 const apiKey = process.env.NEXT_PUBLIC_API_KEY;
-const url = `${baseUrl}?key=${apiKey}${params}`
 
-export const getForecastTest = () => {
-    return async(dispatch) => {
-        const req = async()=> {
+export const getForecastTest = (params) => {
+    const url = `${baseUrl}?key=${apiKey}&q=${params}&aqi=no`
+    return async (dispatch) => {
+        dispatch(MainWeatherAction.setLoading(true));
+        const req = async () => {
             const response = await fetch(url);
             const responseData = response.json();
 
@@ -17,8 +17,12 @@ export const getForecastTest = () => {
         try {
             const request = await req();
             dispatch(MainWeatherAction.getMainWeather(request));
+            dispatch(MainWeatherAction.checkError({status: false, message: "All Good"}));
         } catch (error) {
+            dispatch(MainWeatherAction.checkError({status: true, message: `handle this: ${error}`}));
             throw new Error(`Controlled Error: ${error}`);
+        } finally {
+            dispatch(MainWeatherAction.setLoading(false));
         }
     }
 }
